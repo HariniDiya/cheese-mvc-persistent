@@ -53,13 +53,14 @@ public class CheeseController {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Cheese");
+            model.addAttribute("categories",categoryDao.findAll());
             return "cheese/add";
         }
         Category cat = categoryDao.findOne(categoryId);
         newCheese.setCategory(cat);
 
         cheeseDao.save(newCheese);
-        return "redirect:";
+        return "redirect:/cheese";
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.GET)
@@ -76,7 +77,7 @@ public class CheeseController {
             cheeseDao.delete(cheeseId);
         }
 
-        return "redirect:";
+        return "redirect:/cheese";
     }
 
 }
